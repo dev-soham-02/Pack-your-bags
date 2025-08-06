@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="style.css">
+<style>
+:root{
+    --orange:#ffa500;
+}
+*{
+    
+    margin: 0;padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    transition: all 0.2s linear;
+}
+*::selection{
+    background: var(--orange);
+    color: #fff;
+}
+html{
+    font-size: 62.5%;
+    overflow-x:hidden;
+    scroll-padding-top: 6rem;
+    scroll-behavior:smooth;
+    font-family: Arial, Helvetica, sans-serif;
+}
+section{
+    padding:2rem 9%; 
+}
+.heading{
+    text-align: center;
+    padding: 2.5rem 0;
+    animation:appear 5s linear; 
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+    scroll-behavior:smooth;
+    animation-duration: 0.5s;
+}
+.heading span{
+    font-size: 3.5rem;
+    background:rgba(225, 165, 0, .2);
+    color:var(--orange);
+    border-radius: .5rem;
+    padding:.2rem ;
+    display: inline-block;
+}
+.heading span.space{
+    background:none;
+}
+.btn{
+    display: inline-block;
+    margin-top:1rem;
+    margin-bottom: 1.5rem;
+    background: var(--orange);
+    color: #fff;
+    padding: .8rem 3rem;
+    border: .2rem solid var(--orange);
+    cursor: pointer;
+    font-size: 1.7rem ;
+}
+.btn:hover{
+    background: rgba(225, 165, 0, .2);
+    color:var(--orange) ;
+}
+.button{
+    display: inline-block;
+    margin-top:1rem;
+    margin-bottom: 1.5rem;
+    background: var(--orange);
+    color: #fff;
+    padding: .8rem 3rem;
+    border: .2rem solid var(--orange);
+    cursor: pointer;
+    font-size: 1.7rem ;
+    border-radius: 700px;
+}
+.button:hover{
+    background: rgba(225, 165, 0, .2);
+    color:var(--orange) ;
+}   
+
+header{
+    position: fixed;
+    top: 0; left:0; right:0;
+    background: #333;
+    z-index: 1000;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 2rem 4%;
+}
+header .logo{
+    font-size: 2.5rem;
+    font-weight: bolder;
+    color:#ffffff;
+    text-transform:uppercase;
+}
+header .logo span{
+    color: var(--orange);
+}
+
+header .navbar a{
+    color: #fff;
+    font-size: 2rem;
+    margin: 0.9rem;
+    text-decoration: none;
+}
+header .navbar a:hover{
+    background-color: #ffa500;
+    padding: 7px;
+    border: 0.5px;
+    border-radius: 15px;
+    margin: 15px;
+}
+header .icon{
+    font-size: 2.5rem;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 6rem;
+}
+header .icon i .search-btn:hover{
+    margin-left: 15px;
+}
+header .icon i:hover{
+    color:#ffa500;
+    margin-left: 15px;
+}
+header .search-bar-container{
+    position: absolute;
+    top: 100%; left: 0;right: 0;
+    padding: 1.5rem 2rem;
+    background: #333;
+    border-top: .1rem solid rgba(255, 255, 255, .2);
+    display: flex;
+    align-items: center;
+    z-index: 1001;
+    clip-path: polygon(0 0,100% 0,100% 0,0 0);
+}
+header .search-bar-container.active{
+    clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
+}
+header .search-bar-container #search-bar{
+    width: 100%;
+    padding: 1rem;
+    text-transform: none;
+    color: #333;
+    font-size: 1.7rem;
+    border-radius: .5rem;
+}
+header .search-bar-container label{
+    color: #fff;
+    cursor: pointer;
+    font-size: 2rem;
+    margin-left: 1.5rem;
+}
+header .search-bar-container label:hover{
+    color: var(--orange);
+}
+.login-form-container{
+    position: fixed;
+    top:-120%; left: 0;
+    z-index: 10000;
+    min-height: 100vh;
+    width: 100%;
+    background: rgba(0,0,0,.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-form-container.active{
+    top: 0;
+}
+.login-form-container form{
+    margin: 2rem;
+    padding:1.5rem 2rem;
+    border-radius: .5rem;
+    background: #fff;
+    width: 50rem;
+}
+.login-form-container form h3{
+    font-size: 3rem;
+    color: #444;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 1rem 0;
+}
+.login-form-container form .box{
+    width:100%;
+    padding:1rem;
+    font-size:1.7rem;
+    color: #333;
+    margin:.6rem 0;
+    border:.1rem solid rgba(0,0,0,.3);
+    text-transform: none;
+}
+.login-form-container form .box:focus{
+    border-color: var(--orange);
+}
+.login-form-container form #remenber{
+    margin: 2rem 0;
+}
+.login-form-container form label{
+    font-size: 1.5rem;
+}
+.login-form-container form .btn{
+    display: block;
+    width: 100%;
+}
+.login-form-container form p{
+    padding:.5rem;
+    font-size: 1.5rem;
+    color: #666;
+}
+.login-form-container form p a {
+    color: var(--orange);
+}
+.login-form-container form p a:hover{
+    color:#333;
+    text-decoration: underline;
+}
+.login-form-container #form-close{
+    position: absolute;
+    top: 2rem; right: 3rem;
+    font-size: 5rem;
+    color: #fff;
+    cursor: pointer;
+}
+#menu-bar{
+    color: #fff;
+    border: .1rem solid #fff;
+    border-radius: .5rem;
+    font-size: 3rem;
+    padding: .2rem .5rem;
+    cursor: pointer;
+    display: none;
+}
+.home{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    position: relative;
+    z-index:0;
+    background-attachment:scroll;
+}
+.home .content{
+    text-align: center;
+}
+.home .content h3{
+    font-size: 4rem;
+    color: #fff;
+    text-transform: uppercase;
+    text-shadow: 0.3rem .5rem rgba(0,0,0,.1);
+}
+.home .content p{
+    font-size: 2rem;
+    color: #fff;
+    text-shadow: 0.3rem .5rem rgba(0,0,0,.1);
+}
+.home .video-container video{
+    position: absolute;
+    top: 0;left: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.home .controls{
+    padding: 1rem;
+    border-radius: 4.5rem;
+    background: rgba(0,0,0,.7);
+    position: relative;
+    top: 10rem;
+}
+.home .controls .vid-btn{
+    height: 2rem;
+    width: 2rem;
+    display: inline-block;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    margin: 0.5rem;
+}
+.home .controls .vid-btn.active{
+    background: var(--orange);
+
+}
+
+
+.about{
+    height: 80vh;
+    margin-bottom: 2rem;
+    margin-top: 2rem; 
+}
+.about-us{
+    max-height:auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding:0px 0px;
+    margin: 0px auto;
+    flex-wrap: wrap;
+    gap: 15px;
+
+}
+.about-img{
+    overflow: hidden;
+}
+.about-img img{
+    display: block;
+    width: 100%;
+    height:auto;
+    transition: transform 0.2s;
+}
+.about-img img:hover {
+    transform: scale(1.1);
+}
+.about-content{
+    width: 50%;
+    padding-top:2rem;
+}
+.about-content h2{
+    font-size: 3.7rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+.about-content h2::after{
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--orange);
+    margin-top: px;
+}
+.about-content p{
+    font-size: 1.8rem;
+    color: #666;
+    line-height: 1.6;
+    animation:appear 5s linear; 
+    animation-timeline: view();
+    animation-range: entry 0% cover 30%;
+    scroll-behavior:smooth;
+    animation-duration: 0.5s;
+    padding-top:8px;
+}
+
+/* .package */  
+
+.package h2{
+    padding: 2rem;
+    justify-content: center;
+    display: flex;
+    font-size: 3.7rem;
+    border-top-left-radius: 700px;
+    border-bottom-right-radius: 700px;
+    position: relative;
+    padding: 0%;
+    padding-bottom: 1.5%;
+
+}
+.package h2::after{
+    position: absolute;
+    content: "";
+    width: 10%;
+    background-color:orange;
+    bottom: 10px;
+    z-index: -1;
+    
+}
+.package h2:hover::after{
+    width: 28%;
+    height: 8%;
+    transition: all 0.2s linear;
+
+}
+.package .box-container{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display:flex;
+    flex-wrap:wrap;
+    gap: 1.5rem;
+    }
+.package .box-container .box{
+    width: 30%;
+    border-radius: 10px; 
+    border:2px solid rgb(233, 233, 233);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+.package .box-container .box .box-img img{
+    overflow: hidden;
+    width: 100%;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+}
+
+.package .box-container .box-content{
+    padding:.9rem;
+    width: 100%;
+}
+.package .box-container .box-content .star{
+    color: gold;
+    font-size: 1.5rem;
+}
+.package .box-container .box .box-content h3{
+    font-size:17px;
+    margin: 1rem 0;
+}
+.package .box-container .box .box-content p{
+    font-size: 14px;
+    color: #666;
+    margin: 0.5rem 0;
+}
+.ribbon {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  position: absolute;
+}
+.ribbon::before,
+.ribbon::after {
+  position: absolute;
+  z-index: -1;
+  content: '';
+  display: block;
+  border: 5px solid #2980b9;
+}
+.ribbon span {
+  position: absolute;
+  display: block;
+  width: 225px;
+  padding: 8px 0;
+  background-color: #ffa600;
+  box-shadow: 0 5px 10px rgba(0,0,0,.1);
+  color: #fff;
+  font: 700 10px/1 'Lato', sans-serif;
+  text-shadow: 0 1px 1px rgba(0,0,0,.2);
+  text-transform: uppercase;
+  text-align: center;
+}
+/* top right*/
+.ribbon-top-right {
+  top: 0px;
+  right: 0px;
+}
+.ribbon-top-right::before,
+.ribbon-top-right::after {
+  border-top-color: transparent;
+  border-right-color: transparent;
+}
+.ribbon-top-right::before {
+  top: 0;
+  left: 0;
+}
+.ribbon-top-right::after {
+  bottom: 0;
+  right: 0;
+}
+.ribbon-top-right span {
+    padding-left:55px;
+  left:-13px;
+  top: -1px;
+  transform: rotate(45deg);
+}
+
+
+
+/* service */
+
+
+.service .box-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    width: 100%;
+}
+.service .box-container .box{
+    flex: 1 1 30rem;
+    border-radius: .5rem;
+    text-align: center;
+    border: none;
+    box-shadow: none;
+    margin-bottom:2rem ;
+}
+.service .box-container .box i{
+    padding: 1rem;
+    font-size: 5rem;
+    color:var(--orange)
+}
+.service .box-container .box h3{
+    font-size: 2.5rem;
+    color: #333;
+    position: relative;
+}
+.service .box-container .box p{
+    font-size: 1.5rem;
+    color: #666;
+}
+.service .box-container .box:hover{
+    border: none;
+    transition: all 0.2s ease;
+}
+
+
+/* gallery  */
+
+
+.gallery {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+.gallery-box {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.gallery-box .gallery-image {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    box-sizing: border-box;
+    gap: 7px;
+}
+.gallery-box .gallery-image img {
+    width: 29%;
+    height: auto;
+    transition: transform 0.3s ease;
+    border-radius: 5px;
+}
+.gallery-box .gallery-image img:hover {
+    transform: scale(1.02);
+    transition: smooth 0.3s;
+}
+
+/* review */
+.review{
+    padding: 0%;
+    margin:0 auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@keyframes appear{
+  from{
+    opacity: 0;
+    scale:0.5;
+  }
+  to{
+    opacity: 1;
+    scale:1;
+  }
+}
+@media (max-width:1200px){
+    html{
+    font-size: 55%;
+    }
+}
+@media (max-width:450px){
+    html{
+    font-size: 50%;
+    }
+}
+
+@media (max-width:991px){
+    header{
+        padding: 2rem;
+    }
+}
+
+@media (max-width:890px){
+   #menu-bar{
+    display: initial;
+   }
+
+header .navbar{
+    position: absolute;
+    top: 100%; right: 0;left: 0;
+    background: #333;
+    border-top: .1rem solid rgba(255, 255, 255, .2);
+    padding: 1rem 2rem;
+    clip-path: polygon(0 0,100% 0,100% 0, 0 0);
+   }
+   header .navbar.active{
+    clip-path: polygon(0 0,100% 0,100% 100%, 0 100%);
+   }
+   header .navbar a{
+    display: block;
+    border-radius: .5rem;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    background: #222;
+   }
+}
+
+@media (max-width:1400px) {
+  .about {
+    height: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .about-us {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+  }
+  .about-content {
+    width: 100%;
+    padding-top: 10px;
+    text-align: left;
+  }
+  .about-img {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .about-img img {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    display: block;
+  }
+  .package .box-container .box {
+    width: 48%;
+  }
+}
+@media (max-width: 1200px) {
+  .about-content h2 {
+    font-size: 2.8rem;
+  }
+  .about-content p {
+    font-size: 1.4rem;
+  }
+  .package .box-container .box {
+    width: 40%;
+  }
+}
+
+@media (max-width: 991px) {
+  .about {
+    height: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .about-us {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+  }
+  .about-content {
+    width: 100%;
+    padding-left: 0;
+    text-align: left;
+  }
+  .about-img {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .about-img img {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    display: block;
+  }
+  .package .box-container .box {
+    width: 48%;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-content h2 {
+    font-size: 2.2rem;
+  }
+  .about-content p {
+    font-size: 1.1rem;
+    padding-top: 4px;
+  }
+  .about-img img {
+    max-width: 100%;
+    height: auto;
+  }
+  .package .box-container .box {
+    width: 90%;
+  }
+}
+
+@media (max-width: 450px) {
+  .about {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0 2%;
+  }
+  .about-us {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .about-content {
+    width: 100%;
+    padding-left: 0;
+    text-align: left;
+  }
+  .about-content h2 {
+    font-size: 1.5rem;
+  }
+  .about-content p {
+    font-size: 0.95rem;
+    padding-top: 2px;
+  }
+  .about-img {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  .about-img img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+  .package .box-container .box {
+    width: 98%;
+    margin-bottom: 1rem;
+  }
+}
+
+
+</style>
+</head>
+<body>
+    <header>
+        <div id="menu-bar" class="fas fa-bars"></div>
+        <a href="#" class="logo"><span>P</span>ack your bags</a>
+        <nav class="navbar">
+            <a href="#home">home</a>
+            <a href="#about us">about us</a>
+            <a href="#package">package</a>
+            <a href="#service">service</a>
+            <a href="#gallery">gallery</a>
+            <a href="#review">review</a>
+            <a href="#contact">contact</a>
+        </nav>
+
+        <div class="icon">
+            <i class="fas fa-search" id="search-btn"></i>
+            <i class="fas fa-user" id="login-btn"></i>
+        </div>
+        <form action="" class="search-bar-container">
+            <input type="search" id="search-bar" placeholder="search here....">
+            <label for="search-bar" class="fas fa-search" id="search-btn"></label>
+        </form>
+    </header>
+<div class="login-form-container">
+    <i class="fas fa-times" id="form-close"></i>
+    <form method="post">
+        <h3>login</h3>
+        <input type="email" class="box" placeholder="enter you email" required id="email">
+        <input type="password" class="box" placeholder="enter you password" id="password">
+        <input type="submit" value="Login now" class="btn">
+        <input type="checkbox" id="rememeber me">
+        <label for="rememeber">Rememeber me</label>
+        <p>forget password?<a href="#">click here</a></p>
+        <p>don't have any account?<a href="signin.html">register now</a></p>
+    </form>
+</div>
+<section class="home" id="home">
+    <div class="content">
+        <h3>Adevnture is worthy</h3>
+        <p>Discover new places with us, adventure awaits</p>
+        <a href="#" class="btn">discover more</a>
+    </div>
+    <div class="video-container">
+        <video src="images\vid-1.mp4" id="video-slider" loop autoplay muted></video>
+    </div>
+</section>
+
+<!-- about us -->
+
+<section class="about" id="about us">
+    <div class="about-us">
+        <div class="about-img">
+            <img src="images\search.png" alt="">
+        </div>
+        <div class="about-content">
+            <h2>About us</h2>
+            <p>Welcome to Pack Your Bags, your trusted travel partner for unforgettable journeys across India. Whether you're planning a romantic honeymoon, an adventurous escape, or a relaxing budget-friendly vacation, we’re here to make your dream trip a reality. We specialize in curating domestic tours that cater to every kind of traveler. From newlyweds looking for the perfect honeymoon destination to thrill-seekers chasing their next adventure, our packages are thoughtfully designed to fit your needs and budget. We know every corner of destination and offer exclusive experiences you won’t find anywhere else. Soon we are planning to come up international tours stay logged in and get updates.</p>
+        </div>
+    </div>
+</section>
+
+<section class="package" id="package">
+    <div class="heading">
+     <h1>
+    <span>P</span>
+    <span>A</span>
+    <span>C</span>
+    <span>K</span>
+    <span>A</span>
+    <span>G</span>
+    <span>E</span>
+    <span>S</span>
+    </h1><br><br><br>
+    </div>
+
+<!-- most recommended -->
+
+    <h2><span style="color:orange;">M</span>ost recommended</h2><br><br><br>
+
+<div class="box-container">
+        <div class="box">
+            <div class="ribbon ribbon-top-right"><span>recommended</span></div>
+        <div class="box-img">
+            <img src="images\kerla.jpeg" alt="kerla">
+        </div>
+        <div class="box-content">
+            <h3>Kerla</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing</p>
+            <p>4 days - 3 nights</p>
+            <p>starting @₹12999/-</p>
+            <div class="star">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <a href="C:\Users\Soham sawant\Desktop\project\read more\readmore.html"><div class="button">Read more</div></a>
+        </div>
+    </div>
+
+
+<div class="box">
+        <div class="box-img">
+            <img src="images\mumbai.jpeg" alt="mumbai">
+        </div>
+        <div class="box-content">
+            <h3>Mumbai</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing</p>
+            <p>2 days - 1 night</p>
+            <p>starting @₹2999/-</p>
+            <div class="star">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <div class="button">Read more</div>
+        </div>
+    </div>
+<div class="box">
+        <div class="box-img"><img src="images\amritsar.jpeg" alt="amritsar"></div>
+        <div class="box-content">
+            <h3>Amritsar</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing</p>
+            <p>7 days - 6 nights</p>
+            <p>starting @₹19999/-</p>
+            <div class="star">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <div class="button">Read more</div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-img"><img src="images\assam.jpeg" alt="assam"></div>
+        <div class="box-content">
+            <h3>Asssam</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing</p>
+            <p>11 days - 12 nights</p>
+            <p>starting @₹22999/-</p>
+            <div class="star">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <div class="button">Read more</div>
+        </div>
+    </div>
+<div class="box">
+        <div class="box-img"><img src="images\goa.jpeg" alt="goa"></div>
+        <div class="box-content">
+            <h3>Goa</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing</p>
+            <p>5 days - 6 nights</p>
+            <p>starting @₹17999/-</p>
+            <div class="star">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <div class="button">Read more</div>
+        </div>
+    </div>
+<div class="box">
+        <div class="box-img"><img src="images\gujrat.jpeg" alt="gujrat"></div>
+        <div class="box-content">
+            <h3>Gujrat</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing</p>
+            <p>4 days - 3 nights</p>
+            <p>starting @₹12999/-</p>
+            <div class="star">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <div class="button">Read more</div>
+        </div>
+    </div>
+</div>
+
+</section>
+
+
+<!-- service -->
+
+<section class="service" id="service">
+    <h1 class="heading">
+    <span>S</span>
+    <span>E</span>
+    <span>R</span>
+    <span>V</span>
+    <span>I</span>
+    <span>C</span>
+    <span>E</span>
+    </h1>
+
+    <div class="box-container">
+        <div class="box">
+            <i class="fas fa-hotel"></i>
+            <h3>affordable hotels</h3>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, ex!</p>
+        </div>
+        <div class="box">
+            <i class="fas fa-utensils"></i>
+            <h3>food and drinks</h3>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, ex!</p>
+        </div>
+        <div class="box">
+            <i class="fas fa-bullhorn"></i>
+            <h3>safety guide</h3>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, ex!</p>
+        </div>
+        <div class="box">
+            <i class="fas fa-globe-asia"></i>
+            <h3>around the world</h3>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, ex!</p>
+        </div>
+        <div class="box">
+            <i class="fas fa-plane"></i>
+            <h3>fastest travel</h3>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, ex!</p>
+        </div>
+        <div class="box">
+            <i class="fas fa-hiking"></i>
+            <h3>adventure</h3>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, ex!</p>
+        </div>
+        <div class="box" style="padding: 0 12rem;">
+            <i class="fa-solid fa-book"></i>
+            <h3>best guide</h3>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, ex!</p>
+        </div>
+        <div class="box" style="padding: 0 12rem;">
+            <i class="fa-solid fa-hand-holding-dollar"></i>
+            <h3>affordable price</h3>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, ex!</p>
+        </div>
+    </div>
+</section>
+
+<!-- gallery -->
+
+<section class="gallery" id="gallery">
+    <h1 class="heading" style="margin-bottom: 3rem;">
+    <span>G</span>
+    <span>A</span>
+    <span>L</span>
+    <span>L</span>
+    <span>E</span>
+    <span>R</span>
+    <span>Y</span>
+    </h1>
+    
+
+<section class="gallery">
+    <div class="gallery-box">
+        <div class="gallery-image">
+            <img src="images\gallery1.jpg" alt="">
+            <img src="images\gallery2.jpg" alt="">
+            <img src="images\gallery3.jpg" alt="">
+            <img src="images\gallery5.jpg" alt="">
+            <img src="images\gallery6.jpg" alt="">
+            <img src="images\gallery7.jpg" alt="">
+            <img src="images\gallery8.jpg" alt="">
+            <img src="images\gallery9.jpg" alt="">
+            <img src="images\gallery10.jpg" alt="">
+        </div>
+    </div>
+</section>
+
+<!-- review -->
+
+<section class="review" id="review">
+    <h1 class="heading">
+    <span>R</span>
+    <span>E</span>
+    <span>V</span>
+    <span>I</span>
+    <span>E</span>
+    <span>W</span>
+    </h1>
+
+    
+
+
+
+
+
+</section>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="scipt.js">
+let searchBtn = document.querySelector('#search-btn');
+let searchBar = document.querySelector('.search-bar-container');
+let formBtn = document.querySelector('#login-btn');
+let loginForm = document.querySelector('.login-form-container');
+let formClose = document.querySelector('#form-close');
+let menu = document.querySelector('#menu-bar')
+let navbar = document.querySelector('.navbar');
+let videoBtn = document.querySelectorAll('vid-btn')
+
+window.onscroll = () => {
+    searchBtn.classList.remove('fa-times');
+    searchBar.classList.remove('active');
+     menu.classList.remove('fa-times'); 
+    navbar.classList.remove('active');
+    loginForm.classList.remove('active');
+};
+
+menu.addEventListener('click', () =>{
+    menu.classList.toggle('fa-times'); 
+    navbar.classList.toggle('active');  
+});
+
+searchBtn.addEventListener('click', () =>{
+    searchBtn.classList.toggle('fa-times'); 
+    searchBar.classList.toggle('active');  
+});
+
+formBtn.addEventListener('click', () =>{ 
+    loginForm.classList.add('active');  
+});
+
+formClose.addEventListener('click', () =>{ 
+    loginForm.classList.remove('active');  
+});
+
+</script>
+</body>
+</html>
